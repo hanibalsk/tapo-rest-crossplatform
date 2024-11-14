@@ -61,15 +61,17 @@ install_rust_library() {
     cargo install --git https://github.com/ClementNerma/tapo-rest
 }
 
+
 # Function to build and push a cross-platform Docker image
 build_crossplatform_docker() {
     echo "Building and pushing cross-platform Docker image..."
-    docker buildx create --use || echo "Docker buildx already set up."
-    docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t registry.rlt.sk/tapo-rest-crossplatform:latest --push .
-    # Tag the latest release
     latest_release_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-    docker tag registry.rlt.sk/tapo-rest-crossplatform:latest registry.rlt.sk/tapo-rest-crossplatform:$latest_release_tag
-    docker push registry.rlt.sk/tapo-rest-crossplatform:$latest_release_tag
+    docker buildx create --use || echo "Docker buildx already set up."
+    docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t registry.rlt.sk/tapo-rest-crossplatform:latest -t registry.rlt.sk/tapo-rest-crossplatform:$latest_release_tag --push .
+#    # Tag the latest release
+#    latest_release_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+#    docker tag registry.rlt.sk/tapo-rest-crossplatform:latest registry.rlt.sk/tapo-rest-crossplatform:$latest_release_tag
+#    docker push registry.rlt.sk/tapo-rest-crossplatform:$latest_release_tag
 }
 
 # Main script
