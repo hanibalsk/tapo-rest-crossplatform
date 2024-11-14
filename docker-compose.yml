@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  tapo-rest:
+    image: tapo-rest-crossplatform:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4666:4666"
+    environment:
+      - DEVICES_CONFIG_PATH=config.json
+      - PORT=4666
+      - AUTH_PASSWORD=insert_pass_here
+    restart: unless-stopped
