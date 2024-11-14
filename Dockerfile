@@ -13,7 +13,7 @@ RUN git clone https://github.com/ClementNerma/tapo-rest.git .
 RUN cargo build --release
 
 # Create a minimal runtime image
-FROM debian:buster-slim
+FROM debian:bookworm-slim
 
 # Set working directory
 WORKDIR /usr/local/bin
