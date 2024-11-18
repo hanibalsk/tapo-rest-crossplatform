@@ -9,6 +9,9 @@ WORKDIR /usr/src/tapo-rest
 # Clone the repository
 RUN git clone https://github.com/ClementNerma/tapo-rest.git .
 
+# Check out the specific commit
+RUN git checkout cb85e85
+
 # Build the Rust application
 RUN cargo build --release
 
